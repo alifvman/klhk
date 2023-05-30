@@ -1,53 +1,55 @@
-@extends('layouts.app', ['class' => 'login-page', 'page' => _('Login Page'), 'contentClass' => 'login-page'])
-
+@extends('auth.layouts.app')
+  
 @section('content')
-    <!-- <div class="col-md-10 text-center ml-auto mr-auto">
-        <h3 class="mb-5">Log in to see how you can speed up your web development with out of the box CRUD for #User Management and more.</h3>
-    </div> -->
-    <div class="col-lg-4 col-md-6 ml-auto mr-auto">
-        <form class="form" method="post" action="{{ route('login') }}">
-            @csrf
+    <section class="vh-100">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6 px-0 d-none d-sm-block">
+                    <img src="{{ URL::to('/public/white/img/pepohonan.jpg') }}" alt="Login image" class="img-fluid" style="object-fit: cover; object-position: left;">
+                </div>
+                <div class="col-sm-6 text-black p-5">
 
-            <div class="card card-login card-white">
-                <div class="card-header">
-                    <img src="{{ asset('white') }}/img/card-primary.png" alt="">
-                    <h1 class="card-title">{{ _('Log in') }}</h1>
-                </div>
-                <div class="card-body">
-                    <!-- <p class="text-dark mb-2">Sign in with <strong>admin@white.com</strong> and the password <strong>secret</strong></p> -->
-                    <div class="input-group{{ $errors->has('email') ? ' has-danger' : '' }}">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <i class="tim-icons icon-email-85"></i>
+                    <div class="px-5 ms-xl-4">
+                        <img src="{{ URL::to('/public/logo.png') }}">
+                        <i class="fas fa-crow fa-2x me-3 pt-5 mt-xl-4" style="color: #709085;"></i>
+                        <span class="h1 fw-bold mb-0">KLHK</span>
+                    </div>
+
+                    <div class="d-flex align-items-center h-custom-2 px-5 ms-xl-4 mt-5 pt-5 pt-xl-0 mt-xl-n5">
+
+                        <form style="width: 23rem;" action="{{ route('login.post') }}" method="POST">
+                            @csrf
+
+                            <h3 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Log in</h3>
+
+                            <div class="form-outline mb-4">
+                                <input type="text" id="email_address" class="form-control form-control-lg" name="email" required autofocus />
+                                <label class="form-label" for="email_address">Email address</label>
+                                @if ($errors->has('email'))
+                                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                                @endif
                             </div>
-                        </div>
-                        <input type="email" name="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="{{ _('Email') }}">
-                        @include('alerts.feedback', ['field' => 'email'])
-                    </div>
-                    <div class="input-group{{ $errors->has('password') ? ' has-danger' : '' }}">
-                        <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <i class="tim-icons icon-lock-circle"></i>
+
+                            <div class="form-outline mb-4">
+                                <input type="password" id="form2Example28" name="password" class="form-control form-control-lg" required />
+                                <label class="form-label" for="form2Example28">Password</label>
+                                @if ($errors->has('password'))
+                                    <span class="text-danger">{{ $errors->first('password') }}</span>
+                                @endif
                             </div>
-                        </div>
-                        <input type="password" placeholder="{{ _('Password') }}" name="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}">
-                        @include('alerts.feedback', ['field' => 'password'])
+
+                            <div class="pt-1 mb-4">
+                                <button class="btn btn-info btn-lg btn-block" type="submit">Login</button>
+                            </div>
+
+                        </form>
+
                     </div>
-                </div>
-                <div class="card-footer">
-                    <button type="submit" href="" class="btn btn-primary btn-lg btn-block mb-3">{{ _('Get Started') }}</button>
-                    <!-- <div class="pull-left">
-                        <h6>
-                            <a href="{{ route('register') }}" class="link footer-link">{{ _('Create Account') }}</a>
-                        </h6>
-                    </div>
-                    <div class="pull-right">
-                        <h6>
-                            <a href="{{ route('password.request') }}" class="link footer-link">{{ _('Forgot password?') }}</a>
-                        </h6>
-                    </div> -->
+
                 </div>
             </div>
-        </form>
-    </div>
+        </div>
+    </section>
+
+
 @endsection
